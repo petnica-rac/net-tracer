@@ -1,0 +1,9 @@
+[Unit]
+Description=Ping trace multiple devices
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /usr/bin/trace_devices.sh
+
+[Install]
+WantedBy=multi-user.target
