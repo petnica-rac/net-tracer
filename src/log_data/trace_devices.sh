@@ -2,7 +2,7 @@
 
 trap "kill 0" SIGINT
 
-mkdir "/tmp/trace-network" 2> /dev/null
+mkdir "/var/log/trace-network" 2> /dev/null
 ping_csv_file="/usr/share/trace-network/ping_devices.csv"
 traceroute_csv_file="/usr/share/trace-network/traceroute_devices.csv"
 #csv_file="../../data/devices.csv"
