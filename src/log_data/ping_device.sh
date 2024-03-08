@@ -4,7 +4,7 @@ device=$1
 
 while :; do
     echo "[NEW]" >> "/tmp/trace-network/ping_"$device".log"
-    date +"%d %b %Y %H:%M:%S.%N" 2>&1 >> "/tmp/trace-network/ping_"$device".log"
+    date "+%d/%m/%Y %H:%M:%S" 2>&1 >> "/tmp/trace-network/ping_"$device".log"
    #echo -e "\n" >> "/tmp/trace-network/ping_"$device".log"
     ping -c 1 $device 2>&1 >> "/tmp/trace-network/ping_"$device".log"
     if [ $? -ne 0 ]; then

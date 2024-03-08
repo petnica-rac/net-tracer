@@ -13,5 +13,17 @@
 #echo "Extracted Time: $TIME_INSIDE_BRACKETS"
 
 
-timestamp=$(date +"%d %b %Y %H:%M:%S.%N")
-echo $timestamp
+#timestamp=$(date +"%d %b %Y %H:%M:%S.%N")
+#echo $timestamp
+
+# The input date format: dd/mm/yyyy hh:mm:ss
+input_date="01/01/2020 12:00:00"
+
+# Convert the input date to a format that `date` command understands (yyyy-mm-dd hh:mm:ss)
+formatted_date=$(date -d"${input_date}" "+%Y-%m-%d %H:%M:%S")
+
+# Increment the date by 120 seconds
+incremented_date=$(date -d"${formatted_date} 120 seconds" "+%d/%m/%Y %H:%M:%S")
+
+echo "Original date: $input_date"
+echo "Incremented date: $incremented_date"
