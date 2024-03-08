@@ -11,6 +11,10 @@ sudo chmod +x /usr/bin/traceroute_device.sh
 sudo cp trace-network.service /lib/systemd/system/trace-network.service
 sudo cp trace-network.service /etc/systemd/system/trace-network.service
 
+sudo cp data/ping_devices.csv /usr/share/trace-network/ping_devices.csv
+sudo cp data/traceroute_devices.csv /usr/share/trace-network/traceroute_devices.csv
+
 sudo chmod 644 /etc/systemd/system/trace-network.service
 
-sudo systemctl enable myservice
+sudo systemctl enable trace-network.service
+
