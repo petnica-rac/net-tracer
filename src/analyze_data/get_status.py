@@ -36,16 +36,21 @@ def pattern_match(file_path, pattern, start_date, end_date):
                 if data is not None:
                     data.append(line.strip())
 
-if __name__ == '__main__':
-    file_path = '/tmp/trace-network/ping_8.8.8.8.log'
+def get_status(start_date_str, file_path):
+    #file_path = '/tmp/trace-network/ping_8.8.8.8.log'
     pattern = r'\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2}' 
-    device = sys.argv(0)
-    start_date = sys.args(1)#datetime(2024, 3,7, 21, 20, 17)
+    #device = sys.argv[0]
+    #start_date = sys.argv[1]#datetime(2024, 3,7, 21, 20, 17)
+    start_date = datetime.strptime(start_date_str, '%Y,%m,%d,%H,%M,%S')
+    #datetime(start_date_str)
     end_date = start_date + timedelta(seconds=20)
 
     points = list(pattern_match(file_path, pattern, start_date, end_date))
 
+    if points == []:
+        print("No data found for the given date")
+        return None
+    
     x = [point[0] for point in points if point is not None]
     y = [point[1] for point in points if point is not None]
-    #plt.plot(x, y)
-    #plt.show()
+    return points
