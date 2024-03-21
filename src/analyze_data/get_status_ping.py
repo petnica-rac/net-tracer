@@ -21,10 +21,10 @@ def handle_data(data, start_date, end_date, flag):
     
     parsed_data = parse_ping_output(data)
     if parsed_data:
-        print(cur_date, "RADI")
+        #print(cur_date, "RADI")
         return (cur_date.strftime('%Y-%m-%d %H:%M:%S'), 1)
     else:
-        print(cur_date, "NE RADI")
+        #print(cur_date, "NE RADI")
         return (cur_date.strftime('%Y-%m-%d %H:%M:%S'), 0)
 
 def pattern_match(file_path, pattern, start_date, end_date):

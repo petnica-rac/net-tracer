@@ -23,9 +23,8 @@ def get_data_for_node(ip_address, start_time, duration, node):
 
 def tmp_test():
     # Define nodes and edges to keep them consistent accress all graphs
-    nodes = ['8.8.8.8', '1.1.1.1']
-    edges = [('8.8.8.8', '1.1.1.1')]
-    #
+    
+
 
     # Initialize a directed graph
     G = nx.DiGraph()
@@ -38,19 +37,99 @@ def tmp_test():
     duration = 60
 
     # Add nodes with data
-    node_data = {
-        node:{
-            'ip': node[1],
-            'data': get_data_for_node(node[1], start_time, duration, node)
-            #'data' : generate_sample_data(start_time, end_time, 15, 0.5)
-        } for node in enumerate(nodes)
-    }
+    #node_data = {
+    #    node:{
+    #        'ip': node[1],
+    #        'data': get_data_for_node(node[1], start_time, duration, node)
+    #        #'data' : generate_sample_data(start_time, end_time, 15, 0.5)
+    #    } for node in enumerate(nodes)
+    #}
 
-    for node, data in node_data.items():
-        G.add_node(node, data=data)
-        print(node, data)
-    
+    #for ip, data in node_data.items():
+    #    #print(data)
+    #    G.add_node(ip, **data)
+    #    print(node, data)
+    for ip in nodes:
+        data = get_data_for_node(ip, start_time, duration, ip)
+        G.add_node(ip, data=data)
+
     G.add_edges_from(edges)
+
+    #print(G.number_of_nodes())
+    #print(G.number_of_edges())
+
+    first_node = list(G.nodes)[0]
+    timestamps = G.nodes[first_node]['data']
+
+    for data in timestamps:
+        if data is not None:
+            timestamp, status = data
+            #print(timestamp, status)
+            print("main: ",first_node)
+            print("timestamp: ",timestamp)
+            if status:
+                for child in nx.descendants(G, first_node):
+                    search(G, timestamp, child)
+            else:
+                print("Node failed")
+                print(nx.descendants(G, first_node))
+                return
+            
+
+    #nx.draw(G, with_labels=True, node_color='lightblue', node_size=2000, font_size=10, font_weight='bold')
+    #plt.show()
+
+    #for node in G.nodes:
+    #    print (G.nodes[node]['data'])
+    #    print("IP Address:", node)
+    #    print("Data List:", G.nodes[node]['data'])
+
+def search(G, parent_timestamp, current_node):
+    flag = False
+    print("curr: ",current_node)
+    timestamps=[]
+    unpacked = G.nodes[current_node]['data']
+    for data in unpacked:
+        if data is not None:
+            timestamp, status = data
+            timestamps.append(timestamp)
+        else:
+            flag = True
+    if not flag:
+        set_timestamps = set(timestamps)
+        print("debug-------------------")
+        print(parent_timestamp)
+        print(set_timestamps)
+        print("debug-------------------")
+        if parent_timestamp in set_timestamps:
+            tmp = timestamps.index(timestamp)
+            _,status_unpacked = data[tmp]
+            if status_unpacked:
+                print("Found")
+            else:
+                print("Node failed, but found")
+                print(nx.descendants(G, current_node))
+        else:
+            print("Not Found")
+    flag = False
+    # Implement BFS that will take status for each timestamp from first node and compare it to all the others
+    #for child in nx.descendants(G, current_node):
+
+    #    search(G, child)
+    #first_node_data = G.nodes[first_node]['data']
+    #for node in G.nodes:
+    #    if node != first_node:
+    #        node_data = G.nodes[node]['data']
+    #        for timestamp in first_node_data:
+    #            if timestamp in node_data:
+    #                if first_node_data[timestamp] != node_data[timestamp]:
+    #                    print(f"Status mismatch at timestamp {timestamp} between {first_node} and {node}")
+    #            else:
+    #                print(f"Missing data for timestamp {timestamp} in {node}")
+    #        for timestamp in node_data:
+    #            if timestamp not in first_node_data:
+    #                print(f"Missing data for timestamp {timestamp} in {first_node}")
+    
 
 if __name__ == "__main__":
     tmp_test()
