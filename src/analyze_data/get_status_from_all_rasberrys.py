@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 import sys
 from ast import literal_eval
-from get_status import get_status
+from get_status_ping import get_status
 
 def call_get_status_and_plot(ip_address, subdirectory_path, start_timestamp, duration):#12/03/2024 09:09:32
     data = get_status(start_timestamp, duration, subdirectory_path + '/var/log/trace-network/ping_' + ip_address +'.log')
@@ -45,8 +45,8 @@ def main(ip_address, start_timestamp, duration, base_directory):
 
             data = call_get_status_and_plot(ip_address, subdirectory_path, start_timestamp, int(duration))
             all_data[item] = data
-    
-    plot_data(all_data)
+    print(all_data)
+    #plot_data(all_data)
 
 if __name__ == "__main__":
     base_directory = 'test_data/'

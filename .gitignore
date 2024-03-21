@@ -1,3 +1,4 @@
 /data/*
 /test_data/*
 /src/analyze_data/__pycache__/*
+/src/analyze_data/outdated/*
