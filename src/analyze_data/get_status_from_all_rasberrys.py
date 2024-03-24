@@ -46,7 +46,7 @@ def main(ip_address, start_timestamp, duration, base_directory):
             data = call_get_status_and_plot(ip_address, subdirectory_path, start_timestamp, int(duration))
             all_data[item] = data
     print(all_data)
-    #plot_data(all_data)
+    plot_data(all_data)
 
 if __name__ == "__main__":
     base_directory = 'test_data/'
