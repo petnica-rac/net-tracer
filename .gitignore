@@ -1,5 +1,6 @@
 /data/*
 /test_data/*
+!/test_data/README.md
 /src/analyze_data/__pycache__/*
 /src/analyze_data/outdated/*
 /src/analyze_data/initializeGraph_sensitive.py
