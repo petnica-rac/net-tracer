@@ -39,7 +39,7 @@ def tmp_test(start_time, duration, root_node, database):
         filtered_data = list(filter(lambda item: item is not None, data))
         data_set = set(filtered_data)
         G.add_node(ip, data=data_set)
-        # CHECK: Check if set is
+        # CHECK: Check if set is correct
         print(ip)
         print(data_set)
 
@@ -83,13 +83,11 @@ def plot_graph(G):
     #
     #plt.axis('off')  # Turn off the axis
     #plt.show()
-
-
     
 
 if __name__ == "__main__":
     start_time = '2024,03,12,13,13,0'
-    duration = 60
+    duration = 561600
     root_node = '10.11.0.1'
     database = 'raspberrypi3'
     tmp_test(start_time, duration, root_node, database)
